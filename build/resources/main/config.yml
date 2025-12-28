@@ -1,0 +1,108 @@
+# ═══════════════════════════════════════════════════════════
+#                    AFKPool Configuration
+#                        Version 1.0.0
+# ═══════════════════════════════════════════════════════════
+
+# Plugin settings
+settings:
+  # Enable debug mode (console logging)
+  debug: false
+
+  # WorldGuard region name for AFK pool
+  region-name: "afk"
+
+  # Check interval for region detection (in ticks, 20 ticks = 1 second)
+  # Lower = more accurate, higher = better performance
+  region-check-interval: 5
+
+  # Persist AFK time across server restarts
+  persist-data: true
+
+  # Save interval for persistence (in ticks)
+  save-interval: 6000  # 5 minutes
+
+  # Maximum AFK time before auto-kick (0 to disable)
+  # In minutes
+  max-afk-time: 0
+
+# Reward settings
+rewards:
+  # Reward interval in seconds
+  interval: 300  # 5 minutes
+
+  # Allow rewards while inventory is full (drops items on ground)
+  drop-if-full: true
+
+  # Reward tier priority (highest permission wins)
+  tier-priority:
+    - "afkpool.mvp"
+    - "afkpool.vip"
+    - "default"
+
+  # Prevent reward stacking (reset timer on each reward)
+  reset-timer-on-reward: false
+
+  # Play sound on reward
+  sound:
+    enabled: true
+    type: "ENTITY_PLAYER_LEVELUP"
+    volume: 1.0
+    pitch: 1.0
+
+# Visual feedback
+visuals:
+  # Title configuration
+  title:
+    enabled: true
+    fade-in: 10
+    stay: 60
+    fade-out: 20
+
+  # Action bar configuration
+  actionbar:
+    enabled: true
+    update-interval: 20  # 1 second
+
+  # Particle effects at player location on reward
+  particles:
+    enabled: true
+    type: "VILLAGER_HAPPY"
+    count: 20
+    spread: 1.0
+
+# Performance optimization
+performance:
+  # Use async region checks
+  async-region-checks: true
+
+  # Maximum players to check per tick
+  # Higher = more server load, lower = slower detection
+  players-per-tick: 50
+
+  # Cache region membership (in ticks)
+  region-cache-duration: 20
+
+  # Use UUID cache for offline player lookups
+  uuid-cache: true
+
+# Database settings (for future MySQL support)
+database:
+  type: "YAML"  # YAML or MYSQL
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "afkpool"
+    username: "root"
+    password: "password"
+    pool-size: 10
+
+# Statistics tracking
+statistics:
+  # Track total rewards given
+  track-rewards: true
+
+  # Track total AFK time per player
+  track-time: true
+
+  # Reset statistics on server restart
+  reset-on-restart: false

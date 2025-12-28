@@ -1,0 +1,91 @@
+name: AFKPool
+version: '1.0'
+main: dev.alone.aFKPool.AFKPool
+api-version: '1.21'
+author: Alone
+description: AFK reward system with WorldGuard region integration
+
+depend:
+  - WorldGuard
+
+softdepend:
+  - PlaceholderAPI
+  - Vault
+
+commands:
+  afkpool:
+    description: Main AFKPool command
+    usage: /<command> [stats|reload|toggle|info|reset|settier|leaderboard]
+    aliases: [afk, afkrewards, afkp]
+    permission: afkpool.help
+
+permissions:
+  afkpool.*:
+    description: All AFKPool permissions
+    children:
+      afkpool.help: true
+      afkpool.stats: true
+      afkpool.stats.others: true
+      afkpool.toggle: true
+      afkpool.info: true
+      afkpool.leaderboard: true
+      afkpool.admin: true
+      afkpool.vip: true
+      afkpool.mvp: true
+      afkpool.bypass.maxtime: true
+
+  afkpool.help:
+    description: View help menu
+    default: true
+
+  afkpool.stats:
+    description: View personal statistics
+    default: true
+
+  afkpool.stats.others:
+    description: View other players' statistics
+    default: op
+
+  afkpool.toggle:
+    description: Toggle personal rewards
+    default: true
+
+  afkpool.info:
+    description: View plugin information
+    default: true
+
+  afkpool.leaderboard:
+    description: View AFK Pool leaderboard
+    default: true
+
+  afkpool.admin:
+    description: Administrative commands
+    default: op
+    children:
+      afkpool.reload: true
+      afkpool.reset: true
+      afkpool.settier: true
+
+  afkpool.reload:
+    description: Reload plugin configuration
+    default: op
+
+  afkpool.reset:
+    description: Reset player AFK data
+    default: op
+
+  afkpool.settier:
+    description: Set player reward tier
+    default: op
+
+  afkpool.vip:
+    description: Access to VIP reward tier
+    default: false
+
+  afkpool.mvp:
+    description: Access to MVP reward tier
+    default: false
+
+  afkpool.bypass.maxtime:
+    description: Bypass maximum AFK time restrictions
+    default: false

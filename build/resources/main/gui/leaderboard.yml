@@ -1,0 +1,111 @@
+# ═══════════════════════════════════════════════════════════
+#              AFK Pool Leaderboard GUI Configuration
+# ═══════════════════════════════════════════════════════════
+#
+# This file uses MiniMessage format for colors and formatting
+# Documentation: https://docs.advntr.dev/minimessage/format.html
+#
+# Common Tags:
+#   <color:#HEX> or <red>, <blue>, etc - Colors
+#   <gradient:color1:color2> - Gradients
+#   <bold>, <italic>, <underlined> - Formatting
+#   <rainbow> - Rainbow effect
+# ═══════════════════════════════════════════════════════════
+
+# GUI Settings
+gui:
+  # Title when sorting by rewards
+  title-rewards: "<gradient:#91EFF6:#FFEAC2><bold>AFK Pool</bold></gradient> <dark_gray>-</dark_gray> <yellow>Top Rewards</yellow>"
+
+  # Title when sorting by time
+  title-time: "<gradient:#91EFF6:#FFEAC2><bold>AFK Pool</bold></gradient> <dark_gray>-</dark_gray> <yellow>Top Time</yellow>"
+
+  # Number of rows (1-6, must be 6 for full leaderboard)
+  rows: 6
+
+  # Maximum players to display (max 45 for 6-row GUI)
+  max-players: 45
+
+# Player Head Item
+player-head:
+  # Display name format (%rank%, %player%, %rank_color% available)
+  name: "%rank_color%#%rank% <white>%player%</white>"
+
+  # Lore format
+  lore:
+    - ""
+    - "<gray>Total Rewards: <yellow>%rewards%</yellow></gray>"
+    - "<gray>Total AFK Time: <yellow>%time%</yellow></gray>"
+    - "<gray>Reward Tier: <aqua>%tier%</aqua></gray>"
+    - ""
+    - "%status%"
+
+  # Status messages
+  status:
+    in-pool: "<green>✓ Currently in AFK Pool</green>"
+    not-in-pool: "<red>✗ Not in AFK Pool</red>"
+
+# Rank Colors (MiniMessage format)
+rank-colors:
+  # 1st place
+  first: "<gold><bold>"
+  # 2nd place
+  second: "<gray><bold>"
+  # 3rd place
+  third: "<red><bold>"
+  # 4th and below
+  default: "<yellow>"
+
+# Control Buttons
+buttons:
+  # Sort button (cycles through REWARDS and TIME)
+  sort:
+    slot: 49
+    material-rewards: DIAMOND
+    material-time: CLOCK
+    name-rewards: "<aqua><bold>Sort:</bold></aqua> <yellow>Rewards</yellow>"
+    name-time: "<aqua><bold>Sort:</bold></aqua> <yellow>Time</yellow>"
+    lore-rewards:
+      - "<gray>Showing top players by</gray>"
+      - "<gray>total rewards received</gray>"
+      - ""
+      - "<yellow>▶ Left-click to switch to Time</yellow>"
+    lore-time:
+      - "<gray>Showing top players by</gray>"
+      - "<gray>total AFK time</gray>"
+      - ""
+      - "<yellow>▶ Left-click to switch to Rewards</yellow>"
+    glow: true
+
+  # Your Stats button
+  your-stats:
+    slot: 48
+    material: PLAYER_HEAD
+    name: "<green><bold>Your Statistics</bold></green>"
+    lore:
+      - ""
+      - "<gray>Rank by Rewards: <yellow>#%rank_rewards%</yellow></gray>"
+      - "<gray>Rank by Time: <yellow>#%rank_time%</yellow></gray>"
+      - ""
+      - "<gray>Total Rewards: <yellow>%your_rewards%</yellow></gray>"
+      - "<gray>Total AFK Time: <yellow>%your_time%</yellow></gray>"
+      - "<gray>Tier: <aqua>%your_tier%</aqua></gray>"
+    lore-no-data:
+      - ""
+      - "<red>No data available</red>"
+
+  # Close button
+  close:
+    slot: 50
+    material: BARRIER
+    name: "<red><bold>Close</bold></red>"
+    lore:
+      - "<gray>Click to close</gray>"
+
+# Filler items (decorative glass panes)
+filler:
+  enabled: true
+  # Slots to fill (bottom row slots that aren't buttons)
+  slots: [45, 46, 47, 51, 52, 53]
+  material: GRAY_STAINED_GLASS_PANE
+  name: " "

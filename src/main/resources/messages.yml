@@ -1,0 +1,121 @@
+# ═══════════════════════════════════════════════════════════
+#                    Message Configuration
+# ═══════════════════════════════════════════════════════════
+#
+# This file uses MiniMessage format for colors and formatting
+# Documentation: https://docs.advntr.dev/minimessage/format.html
+#
+# Common Tags:
+#   <color:#HEX> or <red>, <blue>, etc - Colors
+#   <gradient:color1:color2> - Gradients
+#   <bold>, <italic>, <underlined> - Formatting
+#   <rainbow> - Rainbow effect
+#
+# PlaceholderAPI Placeholders:
+#   %player_name%, %player_displayname%, etc.
+#
+# AFKPool Placeholders:
+#   %afkpool_time_in_region% - Time in AFK region
+#   %afkpool_time_remaining% - Time until next reward
+#   %afkpool_total_rewards% - Total rewards received
+#   %afkpool_last_reward% - Last reward name
+#   %afkpool_in_region% - In region status
+#   %afkpool_reward_tier% - Current reward tier
+#   %afkpool_session_time% - Current session time
+# ═══════════════════════════════════════════════════════════
+
+# Prefix for all messages
+prefix: "<gradient:#91EFF6:#FFEAC2><bold>AFKPOOL</bold></gradient> <dark_gray><bold>»</bold></dark_gray>"
+
+# Title messages
+titles:
+  # When player receives a reward
+  reward-received:
+    title: "<gold><bold>REWARD RECEIVED!</bold></gold>"
+    subtitle: "<yellow>%reward_name%</yellow>"
+
+  # When player enters AFK region
+  enter-region:
+    title: "<green><bold>AFK POOL</bold></green>"
+    subtitle: "<gray>Stay here to earn rewards!</gray>"
+
+  # When reward is about to be given (5 seconds before)
+  reward-imminent:
+    title: "<yellow><bold>REWARD INCOMING</bold></yellow>"
+    subtitle: "<gray>Get ready...</gray>"
+
+# Action bar messages
+actionbar:
+  # While in AFK region
+  in-region: "<gray>Next reward in: <yellow>%afkpool_time_remaining%</yellow> <dark_gray>|</dark_gray> <gray>Tier: <aqua>%afkpool_reward_tier%</aqua></gray>"
+
+  # Outside AFK region
+  out-region: "<red>Enter the <yellow>AFK Pool</yellow> <red>to earn rewards!</red>"
+
+  # When reward is imminent (last 10 seconds)
+  reward-soon: "<green><bold>REWARD IN <yellow><bold>%afkpool_time_remaining%</bold></yellow></bold></green>"
+
+  # When inventory is full
+  inventory-full: "<gold><bold>Inventory Full!</bold></gold> <yellow>Items dropped at your feet!</yellow>"
+
+# Chat messages
+messages:
+  # When player receives reward
+  reward-received: "%prefix% <green>You received: <yellow>%reward_name%</yellow><green>!</green>"
+
+  # When player enters AFK region
+  enter-region: "%prefix% <green>You entered the AFK Pool! Earn rewards every <yellow>%reward_interval%</yellow>.</green>"
+
+  # When player exits AFK region
+  exit-region: "%prefix% <red>You left the AFK Pool. Progress reset.</red>"
+
+  # When reward tier changes
+  tier-changed: "%prefix% <green>Reward tier changed to: <yellow>%reward_tier%</yellow></green>"
+
+  # When inventory is full
+  inventory-full: "%prefix% <gold>Your inventory was full! Items were dropped on the ground.</gold>"
+
+  # Admin reload message
+  reload-success: "%prefix% <green>Configuration reloaded successfully!</green>"
+  reload-failed: "%prefix% <red>Failed to reload configuration. Check console for errors.</red>"
+
+  # Error messages
+  no-permission: "%prefix% <red>You don't have permission to do that!</red>"
+  player-only: "%prefix% <red>This command can only be used by players!</red>"
+  invalid-player: "%prefix% <red>Player not found!</red>"
+
+  # Statistics messages
+  stats-header: "<dark_gray><strikethrough>----------</strikethrough></dark_gray> <aqua><bold>AFK Pool Stats</bold></aqua> <dark_gray><strikethrough>----------</strikethrough></dark_gray>"
+  stats-time: "<gray>Time in region: <yellow>%afkpool_time_in_region%</yellow></gray>"
+  stats-rewards: "<gray>Total rewards: <yellow>%afkpool_total_rewards%</yellow></gray>"
+  stats-tier: "<gray>Current tier: <yellow>%afkpool_reward_tier%</yellow></gray>"
+  stats-next: "<gray>Next reward: <yellow>%afkpool_time_remaining%</yellow></gray>"
+  stats-footer: "<dark_gray><strikethrough>--------------------------------</strikethrough></dark_gray>"
+
+# Time formatting
+time-format:
+  # When hours are present
+  hours: "<yellow>%hours%</yellow><gray>h</gray> <yellow>%minutes%</yellow><gray>m</gray> <yellow>%seconds%</yellow><gray>s</gray>"
+
+  # When only minutes are present
+  minutes: "<yellow>%minutes%</yellow><gray>m</gray> <yellow>%seconds%</yellow><gray>s</gray>"
+
+  # When only seconds are present
+  seconds: "<yellow>%seconds%</yellow><gray>s</gray>"
+
+  # Individual units
+  units:
+    hours: "h"
+    minutes: "m"
+    seconds: "s"
+
+# Help menu
+help:
+  header: "<dark_gray><strikethrough>----------</strikethrough></dark_gray> <aqua><bold>AFK Pool Help</bold></aqua> <dark_gray><strikethrough>----------</strikethrough></dark_gray>"
+  commands:
+    - "<yellow>/afkpool stats</yellow> <gray>- View your AFK statistics</gray>"
+    - "<yellow>/afkpool leaderboard</yellow> <gray>- View the top players</gray>"
+    - "<yellow>/afkpool reload</yellow> <gray>- Reload configuration</gray> <red>(Admin)</red>"
+    - "<yellow>/afkpool toggle</yellow> <gray>- Toggle AFK rewards on/off</gray>"
+    - "<yellow>/afkpool info</yellow> <gray>- View plugin information</gray>"
+  footer: "<dark_gray><strikethrough>---------------------------------</strikethrough></dark_gray>"
