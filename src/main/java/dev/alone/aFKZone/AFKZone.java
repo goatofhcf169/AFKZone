@@ -13,10 +13,11 @@ import dev.alone.aFKZone.manager.RewardManager;
 import dev.alone.aFKZone.placeholder.AFKPlaceholder;
 import dev.alone.aFKZone.task.ActionBarTask;
 import dev.alone.aFKZone.task.RewardDistributionTask;
+import dev.alone.aFKZone.util.FoliaScheduler;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 public final class AFKZone extends JavaPlugin {
 
@@ -31,7 +32,7 @@ public final class AFKZone extends JavaPlugin {
     // Tasks
     private RewardDistributionTask rewardTask;
     private ActionBarTask actionBarTask;
-    private BukkitTask autoSaveTask;
+    private ScheduledTask autoSaveTask;
 
     @Override
     public void onEnable() {
@@ -85,7 +86,7 @@ public final class AFKZone extends JavaPlugin {
         // Start auto-save task if persistence is enabled
         if (configManager.isPersistData()) {
             int saveInterval = configManager.getSaveInterval();
-            autoSaveTask = getServer().getScheduler().runTaskTimerAsynchronously(this, () -> {
+            autoSaveTask = FoliaScheduler.runAsyncTimer(this, () -> {
                 dataManager.saveAllPlayerData();
             }, saveInterval, saveInterval);
             getLogger().info("Auto-save task started (interval: " + saveInterval + " ticks)");

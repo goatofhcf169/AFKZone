@@ -2,19 +2,22 @@ package dev.alone.aFKZone.task;
 
 import dev.alone.aFKZone.AFKZone;
 import dev.alone.aFKZone.data.AFKPlayer;
+import dev.alone.aFKZone.util.FoliaScheduler;
 import dev.alone.aFKZone.util.MessageUtil;
+import io.papermc.paper.threadedregions.scheduler.ScheduledTask;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
 /**
  * Task that updates action bars for all online players
+ * Uses Folia's GlobalRegionScheduler and EntityScheduler for thread-safe execution
  */
-public class ActionBarTask extends BukkitRunnable {
+public class ActionBarTask {
 
     private final AFKZone plugin;
+    private ScheduledTask task;
 
     /**
      * Create a new ActionBarTask
@@ -24,30 +27,35 @@ public class ActionBarTask extends BukkitRunnable {
         this.plugin = plugin;
     }
 
-    @Override
-    public void run() {
+    /**
+     * Execute the action bar update for all players
+     */
+    private void executeTask() {
         if (!plugin.getConfigManager().isActionBarEnabled()) {
             return;
         }
 
         try {
             for (Player player : Bukkit.getOnlinePlayers()) {
-                AFKPlayer afkPlayer = plugin.getAFKManager().getAFKPlayer(player.getUniqueId());
+                // Schedule action bar update on the player's region thread
+                FoliaScheduler.runEntity(plugin, player, () -> {
+                    AFKPlayer afkPlayer = plugin.getAFKManager().getAFKPlayer(player.getUniqueId());
 
-                if (afkPlayer == null) {
-                    continue;
-                }
+                    if (afkPlayer == null) {
+                        return;
+                    }
 
-                // Only show action bar when player is in the AFK region
-                if (!afkPlayer.isInRegion()) {
-                    continue;
-                }
+                    // Only show action bar when player is in the AFK region
+                    if (!afkPlayer.isInRegion()) {
+                        return;
+                    }
 
-                String message = getActionBarMessage(player, afkPlayer);
-                if (message != null && !message.isEmpty()) {
-                    Component component = MessageUtil.toComponent(message);
-                    player.sendActionBar(component);
-                }
+                    String message = getActionBarMessage(player, afkPlayer);
+                    if (message != null && !message.isEmpty()) {
+                        Component component = MessageUtil.toComponent(message);
+                        player.sendActionBar(component);
+                    }
+                });
             }
         } catch (Exception e) {
             plugin.getLogger().warning("Error in ActionBarTask: " + e.getMessage());
@@ -135,7 +143,16 @@ public class ActionBarTask extends BukkitRunnable {
      */
     public void start() {
         int interval = plugin.getConfigManager().getActionBarUpdateInterval();
-        this.runTaskTimer(plugin, interval, interval);
+        task = FoliaScheduler.runGlobalTimer(plugin, this::executeTask, interval, interval);
         plugin.getLogger().info("ActionBarTask started (interval: " + interval + " ticks)");
+    }
+
+    /**
+     * Cancel the task
+     */
+    public void cancel() {
+        if (task != null) {
+            task.cancel();
+        }
     }
 }

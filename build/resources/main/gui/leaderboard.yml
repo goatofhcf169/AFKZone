@@ -36,7 +36,6 @@ player-head:
     - ""
     - "<gray>Total Rewards: <yellow>%rewards%</yellow></gray>"
     - "<gray>Total AFK Time: <yellow>%time%</yellow></gray>"
-    - "<gray>Reward Tier: <aqua>%tier%</aqua></gray>"
     - ""
     - "%status%"
 
@@ -60,7 +59,7 @@ rank-colors:
 buttons:
   # Sort button (cycles through REWARDS and TIME)
   sort:
-    slot: 49
+    slot: 48
     material-rewards: DIAMOND
     material-time: CLOCK
     name-rewards: "<aqua><bold>Sort:</bold></aqua> <yellow>Rewards</yellow>"
@@ -79,7 +78,7 @@ buttons:
 
   # Your Stats button
   your-stats:
-    slot: 48
+    slot: 49
     material: PLAYER_HEAD
     name: "<green><bold>Your Statistics</bold></green>"
     lore:
@@ -89,7 +88,6 @@ buttons:
       - ""
       - "<gray>Total Rewards: <yellow>%your_rewards%</yellow></gray>"
       - "<gray>Total AFK Time: <yellow>%your_time%</yellow></gray>"
-      - "<gray>Tier: <aqua>%your_tier%</aqua></gray>"
     lore-no-data:
       - ""
       - "<red>No data available</red>"

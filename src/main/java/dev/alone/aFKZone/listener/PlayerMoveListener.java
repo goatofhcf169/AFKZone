@@ -1,6 +1,7 @@
 package dev.alone.aFKZone.listener;
 
 import dev.alone.aFKZone.AFKZone;
+import dev.alone.aFKZone.util.FoliaScheduler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -24,6 +25,7 @@ public class PlayerMoveListener implements Listener {
 
     /**
      * Handle player movement
+     * Uses AsyncScheduler for region checks and EntityScheduler for player updates
      * @param event The PlayerMoveEvent
      */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -39,16 +41,16 @@ public class PlayerMoveListener implements Listener {
 
         // Check region status asynchronously if enabled
         if (plugin.getConfigManager().getConfig().getBoolean("performance.async-region-checks", true)) {
-            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            FoliaScheduler.runAsync(plugin, () -> {
                 boolean inRegion = plugin.getRegionManager().isInAFKRegion(player);
 
-                // Update status on main thread
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                // Update status on the player's region thread
+                FoliaScheduler.runEntity(plugin, player, () -> {
                     plugin.getAFKManager().updateRegionStatus(player, inRegion);
                 });
             });
         } else {
-            // Sync check
+            // Sync check on player's region thread
             boolean inRegion = plugin.getRegionManager().isInAFKRegion(player);
             plugin.getAFKManager().updateRegionStatus(player, inRegion);
         }

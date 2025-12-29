@@ -2,6 +2,7 @@ name: AFKZone
 version: '${version}'
 main: dev.alone.aFKZone.AFKZone
 api-version: '1.21'
+folia-supported: true
 author: Alone
 description: AFK reward system with WorldGuard region integration
 

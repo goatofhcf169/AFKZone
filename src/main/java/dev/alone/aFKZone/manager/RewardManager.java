@@ -4,14 +4,16 @@ import dev.alone.aFKZone.AFKZone;
 import dev.alone.aFKZone.data.AFKPlayer;
 import dev.alone.aFKZone.data.Reward;
 import dev.alone.aFKZone.data.RewardPool;
+import dev.alone.aFKZone.util.FoliaScheduler;
 import dev.alone.aFKZone.util.ItemBuilder;
 import dev.alone.aFKZone.util.MessageUtil;
+import net.kyori.adventure.key.Key;
+import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Particle;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -137,14 +139,21 @@ public class RewardManager {
         // Play sound
         if (plugin.getConfigManager().isSoundEnabled()) {
             try {
-                Sound sound = Sound.valueOf(plugin.getConfigManager().getSoundType());
-                player.playSound(
-                    player.getLocation(),
-                    sound,
+                String soundType = plugin.getConfigManager().getSoundType();
+                // Convert legacy sound name to namespaced key format
+                String soundKey = soundType.toLowerCase().replace("_", ".");
+                if (!soundKey.contains(":")) {
+                    soundKey = "minecraft:" + soundKey;
+                }
+
+                Sound sound = Sound.sound(
+                    Key.key(soundKey),
+                    Sound.Source.PLAYER,
                     plugin.getConfigManager().getSoundVolume(),
                     plugin.getConfigManager().getSoundPitch()
                 );
-            } catch (IllegalArgumentException e) {
+                player.playSound(sound);
+            } catch (Exception e) {
                 plugin.getLogger().warning("Invalid sound type: " + plugin.getConfigManager().getSoundType());
             }
         }
@@ -227,6 +236,7 @@ public class RewardManager {
 
     /**
      * Grant a command reward to a player
+     * Uses GlobalRegionScheduler for thread-safe command execution
      * @param player The player
      * @param reward The reward
      */
@@ -235,7 +245,7 @@ public class RewardManager {
             String processedCommand = command.replace("%player%", player.getName())
                 .replace("%uuid%", player.getUniqueId().toString());
 
-            Bukkit.getScheduler().runTask(plugin, () -> {
+            FoliaScheduler.runGlobal(plugin, () -> {
                 Bukkit.dispatchCommand(Bukkit.getConsoleSender(), processedCommand);
             });
         }

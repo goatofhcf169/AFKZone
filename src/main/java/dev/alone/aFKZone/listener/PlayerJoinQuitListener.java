@@ -2,6 +2,7 @@ package dev.alone.aFKZone.listener;
 
 import dev.alone.aFKZone.AFKZone;
 import dev.alone.aFKZone.data.AFKPlayer;
+import dev.alone.aFKZone.util.FoliaScheduler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -25,6 +26,7 @@ public class PlayerJoinQuitListener implements Listener {
 
     /**
      * Handle player join
+     * Uses AsyncScheduler for data loading and EntityScheduler for player updates
      * @param event The PlayerJoinEvent
      */
     @EventHandler
@@ -33,10 +35,10 @@ public class PlayerJoinQuitListener implements Listener {
 
         // Load or create player data
         if (plugin.getDataManager() != null) {
-            plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            FoliaScheduler.runAsync(plugin, () -> {
                 AFKPlayer loadedPlayer = plugin.getDataManager().loadPlayerData(player.getUniqueId());
 
-                plugin.getServer().getScheduler().runTask(plugin, () -> {
+                FoliaScheduler.runEntity(plugin, player, () -> {
                     AFKPlayer afkPlayer;
                     if (loadedPlayer == null) {
                         afkPlayer = new AFKPlayer(player.getUniqueId());
@@ -63,6 +65,7 @@ public class PlayerJoinQuitListener implements Listener {
 
     /**
      * Handle player quit
+     * Uses AsyncScheduler for data saving
      * @param event The PlayerQuitEvent
      */
     @EventHandler
@@ -79,7 +82,7 @@ public class PlayerJoinQuitListener implements Listener {
             // Save data asynchronously
             if (plugin.getDataManager() != null && plugin.getConfigManager().isPersistData()) {
                 final AFKPlayer finalAfkPlayer = afkPlayer;
-                plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+                FoliaScheduler.runAsync(plugin, () -> {
                     plugin.getDataManager().savePlayerData(finalAfkPlayer);
 
                     if (plugin.getConfigManager().isDebug()) {

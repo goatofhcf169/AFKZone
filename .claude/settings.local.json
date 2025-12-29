@@ -4,7 +4,12 @@
       "Bash(./gradlew build:*)",
       "Bash(./gradlew clean build:*)",
       "Bash(find:*)",
-      "Bash(./gradlew --stop)"
+      "Bash(./gradlew --stop)",
+      "WebSearch",
+      "WebFetch(domain:docs.papermc.io)",
+      "WebFetch(domain:jd.papermc.io)",
+      "WebFetch(domain:github.com)",
+      "Bash(./gradlew clean:*)"
     ]
   }
 }
