@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(./gradlew build:*)",
-      "Bash(./gradlew clean build:*)"
+      "Bash(./gradlew clean build:*)",
+      "Bash(find:*)",
+      "Bash(./gradlew --stop)"
     ]
   }
 }

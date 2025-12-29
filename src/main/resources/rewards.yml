@@ -13,7 +13,7 @@
 #   - 25.0 chance = 25% probability
 # ═══════════════════════════════════════════════════════════
 
-# Default reward pool (no permission required)
+# Default reward pool
 default:
   enabled: true
   permission: ""
@@ -26,7 +26,7 @@ default:
       amount: 1
       name: "&b&lAFK Diamond"
       lore:
-        - "&7Earned from AFK Pool"
+        - "&7Earned from AFK Zone"
         - "&8Rare Drop"
       glow: true
       chance: 20.0
@@ -62,135 +62,4 @@ default:
       type: EXPERIENCE
       amount: 100
       display-name: "100 XP"
-      chance: 10.0
-
-# VIP reward pool
-vip:
-  enabled: true
-  permission: "afkpool.vip"
-
-  rewards:
-    # Diamond block reward
-    diamond-block:
-      type: ITEM
-      material: DIAMOND_BLOCK
-      amount: 1
-      name: "&b&lVIP Diamond Block"
-      lore:
-        - "&7Exclusive VIP Reward"
-        - "&8Very Rare"
-      glow: true
-      enchantments:
-        - "UNBREAKING:10"  # Unbreakable effect
-      chance: 25.0
-
-    # Big money reward
-    big-money:
-      type: COMMAND
-      commands:
-        - "eco give %player% 500"
-        - "broadcast &e%player% &7earned &a$500 &7from AFK Pool!"
-      display-name: "$500"
-      chance: 30.0
-
-    # Netherite reward
-    netherite:
-      type: ITEM
-      material: NETHERITE_INGOT
-      amount: 1
-      name: "&5&lVIP Netherite"
-      lore:
-        - "&7Powerful material"
-      chance: 20.0
-
-    # Combo reward
-    combo:
-      type: COMMAND
-      commands:
-        - "give %player% minecraft:diamond 5"
-        - "eco give %player% 250"
-        - "xp give %player% 200"
-      display-name: "Mega Combo"
-      chance: 15.0
-
-    # Rare crate key
-    crate-key:
-      type: ITEM
-      material: TRIPWIRE_HOOK
-      amount: 1
-      name: "&d&lVIP Crate Key"
-      lore:
-        - "&7Use at spawn to unlock"
-        - "&7amazing rewards!"
-      glow: true
-      custom-model-data: 1001
-      chance: 10.0
-
-# MVP reward pool
-mvp:
-  enabled: true
-  permission: "afkpool.mvp"
-
-  rewards:
-    # Netherite block
-    netherite-block:
-      type: ITEM
-      material: NETHERITE_BLOCK
-      amount: 1
-      name: "&5&l&kMVP&r &5&lNetherite Block &k&lMVP"
-      lore:
-        - "&7Ultimate MVP Reward"
-        - "&8Legendary"
-      glow: true
-      chance: 30.0
-
-    # Massive money
-    massive-money:
-      type: COMMAND
-      commands:
-        - "eco give %player% 1000"
-        - "broadcast &5&l%player% &7earned &a&l$1000 &7from AFK Pool!"
-      display-name: "$1,000"
-      chance: 25.0
-
-    # Nether star
-    nether-star:
-      type: ITEM
-      material: NETHER_STAR
-      amount: 1
-      name: "&e&lMVP Star"
-      lore:
-        - "&7The rarest of rewards"
-        - "&8Mythic"
-      glow: true
-      chance: 20.0
-
-    # God combo
-    god-combo:
-      type: COMMAND
-      commands:
-        - "give %player% minecraft:netherite_ingot 3"
-        - "give %player% minecraft:diamond 10"
-        - "eco give %player% 750"
-        - "xp give %player% 500 levels"
-        - "broadcast &5%player% &7got the &6&lGOD COMBO &7from AFK Pool!"
-      display-name: "God Combo"
-      chance: 15.0
-
-    # MVP crate key
-    mvp-crate:
-      type: ITEM
-      material: TRIPWIRE_HOOK
-      amount: 1
-      name: "&5&l&kMVP&r &d&lMVP Crate Key &k&lMVP"
-      lore:
-        - "&7The most exclusive crate"
-        - "&7Open for incredible loot!"
-        - ""
-        - "&8Mythic Rarity"
-      glow: true
-      custom-model-data: 1002
-      flags:
-        - "HIDE_ENCHANTS"
-        - "HIDE_ATTRIBUTES"
       chance: 10.0

@@ -1,5 +1,5 @@
 # ═══════════════════════════════════════════════════════════
-#                    AFKPool Configuration
+#                    AFKZone Configuration
 #                        Version 1.0.0
 # ═══════════════════════════════════════════════════════════
 
@@ -8,7 +8,7 @@ settings:
   # Enable debug mode (console logging)
   debug: false
 
-  # WorldGuard region name for AFK pool
+  # WorldGuard region name for AFK zone
   region-name: "afk"
 
   # Check interval for region detection (in ticks, 20 ticks = 1 second)
@@ -32,12 +32,6 @@ rewards:
 
   # Allow rewards while inventory is full (drops items on ground)
   drop-if-full: true
-
-  # Reward tier priority (highest permission wins)
-  tier-priority:
-    - "afkpool.mvp"
-    - "afkpool.vip"
-    - "default"
 
   # Prevent reward stacking (reset timer on each reward)
   reset-timer-on-reward: false
@@ -91,7 +85,7 @@ database:
   mysql:
     host: "localhost"
     port: 3306
-    database: "afkpool"
+    database: "afkzone"
     username: "root"
     password: "password"
     pool-size: 10

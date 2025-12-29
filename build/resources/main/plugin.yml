@@ -1,6 +1,6 @@
-name: AFKPool
+name: AFKZone
 version: '1.0'
-main: dev.alone.aFKPool.AFKPool
+main: dev.alone.aFKZone.AFKZone
 api-version: '1.21'
 author: Alone
 description: AFK reward system with WorldGuard region integration
@@ -13,79 +13,64 @@ softdepend:
   - Vault
 
 commands:
-  afkpool:
-    description: Main AFKPool command
-    usage: /<command> [stats|reload|toggle|info|reset|settier|leaderboard]
-    aliases: [afk, afkrewards, afkp]
-    permission: afkpool.help
+  afkzone:
+    description: Main AFKZone command
+    usage: /<command> [stats|reload|toggle|info|reset|leaderboard]
+    aliases: [afk, afkrewards]
+    permission: afkzone.help
 
 permissions:
-  afkpool.*:
-    description: All AFKPool permissions
+  afkzone.*:
+    description: All AFKZone permissions
     children:
-      afkpool.help: true
-      afkpool.stats: true
-      afkpool.stats.others: true
-      afkpool.toggle: true
-      afkpool.info: true
-      afkpool.leaderboard: true
-      afkpool.admin: true
-      afkpool.vip: true
-      afkpool.mvp: true
-      afkpool.bypass.maxtime: true
+      afkzone.help: true
+      afkzone.stats: true
+      afkzone.stats.others: true
+      afkzone.toggle: true
+      afkzone.info: true
+      afkzone.leaderboard: true
+      afkzone.admin: true
+      afkzone.bypass.maxtime: true
 
-  afkpool.help:
+  afkzone.help:
     description: View help menu
     default: true
 
-  afkpool.stats:
+  afkzone.stats:
     description: View personal statistics
     default: true
 
-  afkpool.stats.others:
+  afkzone.stats.others:
     description: View other players' statistics
     default: op
 
-  afkpool.toggle:
+  afkzone.toggle:
     description: Toggle personal rewards
     default: true
 
-  afkpool.info:
+  afkzone.info:
     description: View plugin information
     default: true
 
-  afkpool.leaderboard:
-    description: View AFK Pool leaderboard
+  afkzone.leaderboard:
+    description: View AFK Zone leaderboard
     default: true
 
-  afkpool.admin:
+  afkzone.admin:
     description: Administrative commands
     default: op
     children:
-      afkpool.reload: true
-      afkpool.reset: true
-      afkpool.settier: true
+      afkzone.reload: true
+      afkzone.reset: true
 
-  afkpool.reload:
+  afkzone.reload:
     description: Reload plugin configuration
     default: op
 
-  afkpool.reset:
+  afkzone.reset:
     description: Reset player AFK data
     default: op
 
-  afkpool.settier:
-    description: Set player reward tier
-    default: op
-
-  afkpool.vip:
-    description: Access to VIP reward tier
-    default: false
-
-  afkpool.mvp:
-    description: Access to MVP reward tier
-    default: false
-
-  afkpool.bypass.maxtime:
+  afkzone.bypass.maxtime:
     description: Bypass maximum AFK time restrictions
     default: false

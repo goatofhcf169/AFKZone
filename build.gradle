@@ -70,14 +70,14 @@ processResources {
     }
 }
 tasks.jar {
-    setArchiveFileName("AFKPool.jar")
+    setArchiveFileName("AFKZone.jar")
 }
 
 shadowJar {
     archiveClassifier.set('')
-    archiveFileName.set("AFKPool.jar")
+    archiveFileName.set("AFKZone.jar")
 
-    relocate 'com.google.common', 'dev.alone.afkpool.libs.guava'
+    relocate 'com.google.common', 'dev.alone.afkzone.libs.guava'
 
     minimize()
 }

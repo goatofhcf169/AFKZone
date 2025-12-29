@@ -25,7 +25,7 @@
 # ═══════════════════════════════════════════════════════════
 
 # Prefix for all messages
-prefix: "<gradient:#91EFF6:#FFEAC2><bold>AFKPOOL</bold></gradient> <dark_gray><bold>»</bold></dark_gray>"
+prefix: "<gradient:#91EFF6:#FFEAC2><bold>AFKZONE</bold></gradient> <dark_gray><bold>»</bold></dark_gray>"
 
 # Title messages
 titles:
@@ -36,7 +36,7 @@ titles:
 
   # When player enters AFK region
   enter-region:
-    title: "<green><bold>AFK POOL</bold></green>"
+    title: "<green><bold>AFK ZONE</bold></green>"
     subtitle: "<gray>Stay here to earn rewards!</gray>"
 
   # When reward is about to be given (5 seconds before)
@@ -47,10 +47,10 @@ titles:
 # Action bar messages
 actionbar:
   # While in AFK region
-  in-region: "<gray>Next reward in: <yellow>%afkpool_time_remaining%</yellow> <dark_gray>|</dark_gray> <gray>Tier: <aqua>%afkpool_reward_tier%</aqua></gray>"
+  in-region: "<gray>Next reward in: <yellow>%afkpool_time_remaining%</yellow></gray>"
 
   # Outside AFK region
-  out-region: "<red>Enter the <yellow>AFK Pool</yellow> <red>to earn rewards!</red>"
+  out-region: "<red>Enter the <yellow>AFK Zone</yellow> <red>to earn rewards!</red>"
 
   # When reward is imminent (last 10 seconds)
   reward-soon: "<green><bold>REWARD IN <yellow><bold>%afkpool_time_remaining%</bold></yellow></bold></green>"
@@ -64,13 +64,10 @@ messages:
   reward-received: "%prefix% <green>You received: <yellow>%reward_name%</yellow><green>!</green>"
 
   # When player enters AFK region
-  enter-region: "%prefix% <green>You entered the AFK Pool! Earn rewards every <yellow>%reward_interval%</yellow>.</green>"
+  enter-region: "%prefix% <green>You entered the AFK Zone! Earn rewards every <yellow>%reward_interval%</yellow>.</green>"
 
   # When player exits AFK region
-  exit-region: "%prefix% <red>You left the AFK Pool. Progress reset.</red>"
-
-  # When reward tier changes
-  tier-changed: "%prefix% <green>Reward tier changed to: <yellow>%reward_tier%</yellow></green>"
+  exit-region: "%prefix% <red>You left the AFK Zone. Progress reset.</red>"
 
   # When inventory is full
   inventory-full: "%prefix% <gold>Your inventory was full! Items were dropped on the ground.</gold>"
@@ -85,10 +82,9 @@ messages:
   invalid-player: "%prefix% <red>Player not found!</red>"
 
   # Statistics messages
-  stats-header: "<dark_gray><strikethrough>----------</strikethrough></dark_gray> <aqua><bold>AFK Pool Stats</bold></aqua> <dark_gray><strikethrough>----------</strikethrough></dark_gray>"
+  stats-header: "<dark_gray><strikethrough>----------</strikethrough></dark_gray> <aqua><bold>AFK Zone Stats</bold></aqua> <dark_gray><strikethrough>----------</strikethrough></dark_gray>"
   stats-time: "<gray>Time in region: <yellow>%afkpool_time_in_region%</yellow></gray>"
   stats-rewards: "<gray>Total rewards: <yellow>%afkpool_total_rewards%</yellow></gray>"
-  stats-tier: "<gray>Current tier: <yellow>%afkpool_reward_tier%</yellow></gray>"
   stats-next: "<gray>Next reward: <yellow>%afkpool_time_remaining%</yellow></gray>"
   stats-footer: "<dark_gray><strikethrough>--------------------------------</strikethrough></dark_gray>"
 
@@ -111,11 +107,11 @@ time-format:
 
 # Help menu
 help:
-  header: "<dark_gray><strikethrough>----------</strikethrough></dark_gray> <aqua><bold>AFK Pool Help</bold></aqua> <dark_gray><strikethrough>----------</strikethrough></dark_gray>"
+  header: "<dark_gray><strikethrough>----------</strikethrough></dark_gray> <aqua><bold>AFK Zone Help</bold></aqua> <dark_gray><strikethrough>----------</strikethrough></dark_gray>"
   commands:
-    - "<yellow>/afkpool stats</yellow> <gray>- View your AFK statistics</gray>"
-    - "<yellow>/afkpool leaderboard</yellow> <gray>- View the top players</gray>"
-    - "<yellow>/afkpool reload</yellow> <gray>- Reload configuration</gray> <red>(Admin)</red>"
-    - "<yellow>/afkpool toggle</yellow> <gray>- Toggle AFK rewards on/off</gray>"
-    - "<yellow>/afkpool info</yellow> <gray>- View plugin information</gray>"
+    - "<yellow>/afkzone stats</yellow> <gray>- View your AFK statistics</gray>"
+    - "<yellow>/afkzone leaderboard</yellow> <gray>- View the top players</gray>"
+    - "<yellow>/afkzone reload</yellow> <gray>- Reload configuration</gray> <red>(Admin)</red>"
+    - "<yellow>/afkzone toggle</yellow> <gray>- Toggle AFK rewards on/off</gray>"
+    - "<yellow>/afkzone info</yellow> <gray>- View plugin information</gray>"
   footer: "<dark_gray><strikethrough>---------------------------------</strikethrough></dark_gray>"
